@@ -89,7 +89,7 @@ gulp.task('template-concat', function () {
         .pipe(gulp.dest(staticDir + 'javascript/'));
 });
 
-gulp.task('default', ['source-concat', 'design-concat', 'app-concat', 'css-concat', 'template-concat']);
+gulp.task('default', gulp.series('source-concat', 'design-concat', 'app-concat', 'css-concat', 'template-concat'));
 
 gulp.task('watch', function() {
     gulp.watch(webAppDir + '**/*.js', ['app-concat']);

@@ -22,8 +22,8 @@ import java.util.List;
  * Class ChequeService is service, that handle ChequeController
  * Use @Autowired for connect to necessary repositories and entity manager
  *
- * @version 1.1
  * @author Dmitry
+ * @version 1.1
  * @since 21.01.2016
  */
 
@@ -49,20 +49,21 @@ public class ChequeService {
 
     /**
      * Method synchronizeCheque save cheque to DB and return it to frontend
+     *
      * @param cheque is data for Cheque.class, that was create on client-side
      * @return Cheque, that added
      */
     @Modifying
     @Transactional
     public Cheque synchronizeCheque(@RequestBody Cheque cheque) {
-        var ID = cheque.getId();
+        Long ID = cheque.getId();
 
-        if(cheque.getBalance().getCheque() == null)
+        if (cheque.getBalance().getCheque() == null)
             cheque.getBalance().setCheque(cheque);
 
         chequeRepository.save(cheque);
 
-        if(ID == null)
+        if (ID == null)
             return chequeRepository.findFirstByOrderByIdDesc();
         else
             return chequeRepository.findById(ID).orElseThrow(EntityNotFoundException::new);
@@ -70,6 +71,7 @@ public class ChequeService {
 
     /**
      * Method getCheque get cheque from DB by id
+     *
      * @param chequeID is ID of cheque in database, that client-side wants
      * @return Cheque, that client-side was request
      */
@@ -80,6 +82,7 @@ public class ChequeService {
 
     /**
      * Method deleteCheque remove cheque from DB by id
+     *
      * @param chequeID is ID of cheque in database, that client-side wants to delete
      */
     @Modifying
@@ -93,6 +96,7 @@ public class ChequeService {
      * Method attentionCheques return list of cheque,
      * that wasn't returned to client and wasn't close and hasn't diagnostic comment
      * Use for engineers
+     *
      * @return list of cheque filtered by special rules
      */
     @Transactional(readOnly = true)
@@ -103,6 +107,7 @@ public class ChequeService {
     /**
      * Method attentionChequesByDelay return list of cheque, that has delay in diagnostic
      * Use for engineers
+     *
      * @return list of cheque, that has delay in diagnostic
      */
     @Transactional(readOnly = true)
@@ -112,6 +117,7 @@ public class ChequeService {
 
     /**
      * Method getMinChequesList return list of cheque by request without some field for size optimization
+     *
      * @param request by which should be returned list of cheques
      * @return list of cheque by request without some field for size optimization
      */
@@ -146,10 +152,10 @@ public class ChequeService {
                     .filter(date -> date.isBefore(OffsetDateTime.now().minusDays(30)))
                     .isPresent();
 
-            if(emptyDiagnostics)
+            if (emptyDiagnostics)
                 source.withRecencyStatus(true);
 
-            if(!source.isReadyStatus() && hasDelay)
+            if (!source.isReadyStatus() && hasDelay)
                 source.withDelayStatus(true);
 
             source.setDiagnostics(null);

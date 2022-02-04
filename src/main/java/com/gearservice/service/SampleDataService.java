@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toSet;
  * @since 04.09.2015
  */
 public class SampleDataService {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * Method getRandomName using method getRandomFrom find one random name from enum and return it
@@ -66,31 +66,31 @@ public class SampleDataService {
      * Method getRandomMalfunction return one value at current time
      * @return malfunction
      */
-    public static String getRandomMalfunction() {return "Не работает ничего.";}
+    public static String getRandomMalfunction() {return "Defekter Akku.";}
 
     /**
      * Method getRandomSpecialNotes return one value at current time
      * @return special notes
      */
-    public static String getRandomSpecialNotes() {return "Не работает";}
+    public static String getRandomSpecialNotes() {return "Gerät startet nicht mehr.";}
 
     /**
      * Method getRandomAddress return one value at current time
      * @return address
      */
-    public static String getRandomAddress() {return "г. Донецк, ул. Деловая 15";}
+    public static String getRandomAddress() {return "Musterstraße, 12345 Musterstadt";}
 
     /**
      * Method getRandomPhone return one value at current time
      * @return phone number
      */
-    public static String getRandomPhone() {return "+38 066 666 66 66";}
+    public static String getRandomPhone() {return "+49 1234567";}
 
     /**
      * Method getRandomEmail return one value at current time
      * @return email address
      */
-    public static String getRandomEmail() {return "pipe@pipe.ru";}
+    public static String getRandomEmail() {return "test@gmail.com";}
 
     /**
      * Method getRandomDate using methods of OffsetDateTime and method randomNumberInRange create random date

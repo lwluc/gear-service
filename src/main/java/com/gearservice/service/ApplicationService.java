@@ -95,17 +95,17 @@ public class ApplicationService {
         Authority boss = new Authority("ROLE_BOSS");
 
         User admin = new User();
-        admin.setUsername("sirouga");
+        admin.setUsername("amaier");
         admin.setPassword(passwordEncoder().encode("12345"));
-        admin.setFullname("Калинюк С.В.");
+        admin.setFullname("Andreas Maier");
         admin.setEnabled(true);
         admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin), engineer.withUsername(admin), secretary.withUsername(admin))));
         userRepository.save(admin);
 
         User svetka = new User();
-        svetka.setUsername("svetik");
+        svetka.setUsername("tschneider");
         svetka.setPassword(passwordEncoder().encode("12345"));
-        svetka.setFullname("Светик С.В.");
+        svetka.setFullname("Tanja Schneider");
         svetka.setEnabled(true);
         svetka.setAuthorities(new HashSet<>(asList(secretary.withUsername(svetka))));
         userRepository.save(svetka);
