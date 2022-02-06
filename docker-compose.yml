@@ -22,4 +22,4 @@ services:
     volumes:
       - ./config:/config
       - ./build/libs:/app
-    command: ./config/wait-for-it.sh mysql:3306 -t 300 -s -- java -jar ./app/gs.jar
+    command: ./wait-for-it.sh mysql:3306 -t 300 -s -- java -jar ./app.jar

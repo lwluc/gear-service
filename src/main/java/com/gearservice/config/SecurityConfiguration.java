@@ -100,7 +100,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .tokenValiditySeconds(25000)
                 .and().authorizeRequests()
                     .antMatchers("/index.html", "/", "/login", "/javascript/**", "/fonts/**",
-                            "/stylesheets/**", "/images/**", "/api/currency-rate", "/favicon.ico")
+                            "/stylesheets/**", "/images/**", "/api/currency-rate", "/favicon.ico", "/actuator/**")
                     .permitAll()
                     .antMatchers(HttpMethod.GET, "/attention").hasAnyAuthority("ROLE_ADMIN", "ROLE_ENGINEER", "ROLE_BOSS")
                     .antMatchers(HttpMethod.GET, "/delay").hasAnyAuthority("ROLE_ADMIN", "ROLE_ENGINEER", "ROLE_BOSS")
