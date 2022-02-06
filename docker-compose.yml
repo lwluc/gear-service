@@ -1,25 +1,7 @@
 version: '2'
 services:
-  mysql:
-    image: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=steamservice
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-
-  mongo:
-    image: mongo
-
   app:
+    image: lwluc/gear-service
     build: .
     ports:
-      - "443:443"
-    environment:
-      - SPRING_PROFILE=docker
-    depends_on:
-      - mysql
-      - mongo
-    volumes:
-      - ./config:/config
-      - ./build/libs:/app
-    command: ./wait-for-it.sh mysql:3306 -t 300 -s -- java -jar ./app.jar
+      - "8080:8080"
