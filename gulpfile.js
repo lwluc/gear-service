@@ -6,6 +6,7 @@ const templateCache = require('gulp-angular-templatecache');
 const htmlmin = require('gulp-htmlmin');
 const cleanCSS = require('gulp-clean-css');
 const ngAnnotate = require('gulp-ng-annotate');
+const replace = require('gulp-replace');
 
 const staticDir = 'src/main/resources/static/';
 const webAppDir = 'src/main/javascript/';
@@ -37,24 +38,24 @@ const csslib = [
     'node_modules/angular-loading-bar/build/loading-bar.min.css'
 ];
 
-gulp.task('source-concat', function() {
-    return gulp.src(jslib)
+gulp.task('source-concat',() => (
+    gulp.src(jslib)
         .pipe(newer(staticDir + 'javascript/source.min.js'))
         .pipe(concat('source.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(staticDir + 'javascript/'))
-});
+));
 
-gulp.task('design-concat', function() {
-    return gulp.src(csslib)
+gulp.task('design-concat',() => (
+    gulp.src(csslib)
         .pipe(newer(staticDir + 'stylesheets/design.min.css'))
         .pipe(concat('design.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest(staticDir + 'stylesheets/'))
-});
+));
 
-gulp.task('app-concat', function () {
-    return gulp.src([
+gulp.task('app-concat',() => (
+    gulp.src([
         webAppDir + 'app.js',
         webAppDir + 'app/**/*.js',
         webAppDir + 'directives/**/*.js',
@@ -66,18 +67,18 @@ gulp.task('app-concat', function () {
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(gulp.dest(staticDir + 'javascript/'))
-});
+));
 
-gulp.task('css-concat', function () {
-    return gulp.src([webAppDir + '**/*.css'])
+gulp.task('css-concat',() => (
+    gulp.src([webAppDir + '**/*.css'])
         .pipe(newer(staticDir + 'stylesheets/main.min.css'))
         .pipe(concat('main.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest(staticDir + 'stylesheets/'))
-});
+));
 
-gulp.task('template-concat', function () {
-    return gulp.src([
+gulp.task('template-concat',() => (
+    gulp.src([
         webAppDir + '/**/*.html'
     ])
         .pipe(htmlmin({collapseWhitespace: true}))
@@ -86,12 +87,13 @@ gulp.task('template-concat', function () {
             standalone: true,
             filename: "templates.min.js"
         }))
-        .pipe(gulp.dest(staticDir + 'javascript/'));
-});
+        .pipe(replace('put(\'/', 'put(\''))
+        .pipe(gulp.dest(staticDir + 'javascript/'))
+));
 
 gulp.task('default', gulp.series('source-concat', 'design-concat', 'app-concat', 'css-concat', 'template-concat'));
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch(webAppDir + '**/*.js', ['app-concat']);
     gulp.watch(webAppDir + '**/*.html', ['template-concat']);
     gulp.watch(webAppDir + '**/*.css', ['css-concat']);
