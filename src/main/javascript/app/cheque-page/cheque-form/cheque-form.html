@@ -4,7 +4,7 @@
         <div class="md-toolbar-tools">
             <h2>
                 <span ng-show="hasID">{{'Change cheque' | translate}} №{{cheque.id}}</span>
-                <span ng-hide="hasID">{{'new cheque' | translate}}</span>
+                <span ng-hide="hasID">{{'New Cheque' | translate}}</span>
             </h2>
 
             <span flex></span>
@@ -222,7 +222,7 @@
     <md-content layout-padding layout="row" layout-sm="column" layout-align="center start" class="text-field">
 
         <md-input-container flex="50">
-            <label>{{'master' | translate}}</label>
+            <label>{{'Master' | translate}}</label>
             <md-select ng-model="cheque.engineer"
                        md-on-open="getUsers()"
                        name="engineer"

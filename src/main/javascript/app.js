@@ -124,10 +124,10 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
         cfpLoadingBarProvider.latencyThreshold = 100;
     })
     .config(function($mdDateLocaleProvider) {
-            $mdDateLocaleProvider.months = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
-            $mdDateLocaleProvider.shortMonths = 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_');
-            $mdDateLocaleProvider.days = 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_');
-            $mdDateLocaleProvider.shortDays = 'вс_пн_вт_ср_чт_пт_сб'.split('_');
+            $mdDateLocaleProvider.months = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+            $mdDateLocaleProvider.shortMonths = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+            $mdDateLocaleProvider.days = 'Monday_Tuesday_Wednesday_Thursday_Friday_Saturday_Sunday'.split('_');
+            $mdDateLocaleProvider.shortDays = 'Mon_Tue_Wed_Thu_Fri_Sat_Sun'.split('_');
             // Change week display to start on Monday.
             $mdDateLocaleProvider.firstDayOfWeek = 1;
 
@@ -143,7 +143,7 @@ angular.module("mainModule", ['gettext', 'ui.router', 'angularMoment', 'ngMateri
     .run(function(gettextCatalog, amMoment, auth, security, autocomplete, $rootScope){
             auth.init();
             security.init();
-            gettextCatalog.setCurrentLanguage('ru');
-            amMoment.changeLocale('ru');
+            gettextCatalog.setCurrentLanguage('en');
+            amMoment.changeLocale('en');
             $rootScope.tableFilter = {sort: '-id', size: 15, page: 1};
     });
