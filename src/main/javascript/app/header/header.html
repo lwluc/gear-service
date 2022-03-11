@@ -7,18 +7,6 @@
             <md-tab ui-sref="cheque.profile" ng-if="security.hasRole('ROLE_ADMIN')">{{'administration' | translate}}</md-tab>
         </md-tabs>
 
-        <md-content layout-align="center end" flex="30">
-
-            <md-content layout="row" layout-padding layout-align="end end" flex ng-show="!!$root.currencyRates.addDate">
-                <h4>{{'currency rates' | translate}} {{$root.currencyRates.addDate | amDateFormat: 'll'}}</h4>
-                <md-content layout="row" class="currency-rates">
-                    <h4>USD {{$root.currencyRates["usd"]}}<span class="sign">₽</span>,</h4>
-                    <h4>UAH {{$root.currencyRates["uah"]}}<span class="sign">₽</span></h4>
-                </md-content>
-            </md-content>
-
-        </md-content>
-
         <md-content layout-padding layout="row" layout-align="end end" flex="20" class="login-panel">
             <span>{{profileName()}}</span>
             <md-button type="button" ng-if="authenticated()" ng-click="logout()" class="md-icon-button logout">

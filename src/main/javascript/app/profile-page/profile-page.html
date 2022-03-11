@@ -4,7 +4,7 @@
 
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{'users' | translate}}</h2>
+                <h2>{{'Users' | translate}}</h2>
 
                 <span flex></span>
 
@@ -23,24 +23,5 @@
         </md-content>
 
     </section>
-
-    <md-content class="content-block md-whiteframe-z1">
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>{{'currency rates' | translate}}</h2>
-            </div>
-        </md-toolbar>
-
-        <md-content layout-padding>
-
-            <md-list layout="row" layout-align="center center">
-                <md-list-item class="day" ng-repeat="rate in rates | orderBy: 'addDate'" layout-wrap layout="row" layout-align="center center">
-                    <currency-rate-day ng-model="rate"></currency-rate-day>
-                </md-list-item>
-            </md-list>
-
-        </md-content>
-
-    </md-content>
 
 </section>
