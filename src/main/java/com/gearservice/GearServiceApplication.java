@@ -14,9 +14,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Collections;
 import java.util.HashSet;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 /**
  * Class GearServiceApplication is main, configurable class of application.
@@ -38,17 +40,18 @@ public class GearServiceApplication {
     public static void main(String[] args) {SpringApplication.run(GearServiceApplication.class, args);}
 
     @Bean
-    @Profile({"dev", "docker", "heroku"})
+    @Profile({"dev", "docker"})
     CommandLineRunner init() {
+        final String adminUser = "admin";
         return args -> {
-            if (!userRepository.existsById("admin")) {
+            if (!userRepository.existsById(adminUser)) {
                 Authority administrator = new Authority("ROLE_ADMIN");
                 User admin = new User();
-                admin.setUsername("admin");
+                admin.setUsername(adminUser);
                 admin.setPassword(new BCryptPasswordEncoder().encode("b"));
-                admin.setFullname("admin");
+                admin.setFullname(adminUser);
                 admin.setEnabled(true);
-                admin.setAuthorities(new HashSet<>(asList(administrator.withUsername(admin))));
+                admin.setAuthorities(new HashSet<>(singletonList(administrator.withUsername(admin))));
                 userRepository.save(admin);
             }
 

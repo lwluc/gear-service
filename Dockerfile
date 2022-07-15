@@ -8,4 +8,4 @@ COPY build/libs/gs.jar app.jar
 
 COPY ./config/ ./config
 
-ENTRYPOINT ["java","-javaagent:./opentelemetry-javaagent.jar","-jar","/app.jar"]
+ENTRYPOINT ["java","-javaagent:./opentelemetry-javaagent.jar","-jar","-Dspring.profiles.active=docker","/app.jar"]
